@@ -89,7 +89,8 @@
 		<a href="/cashbook/updateAdminPwForm.jsp">[비밀번호 변경]</a>
 	</div>
 	<ol>
-		<li><a href="">[]</a></li>
+		<li><a href="/cashbook/category/insertCategoryForm.jsp">[카테고리 입력하기]</a></li>
+		<li><a href="/cashbook/category/categoryList.jsp">[카테고리 리스트]</a></li>
 	</ol>
 </body>
 </html>

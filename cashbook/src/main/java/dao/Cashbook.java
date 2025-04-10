@@ -9,7 +9,7 @@ import org.apache.catalina.connector.Response;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class Cashbook {
+public class Cashbook {	
     public boolean login(String adminId, String adminPw, HttpServletRequest request, HttpServletResponse response) 
             throws ClassNotFoundException, SQLException, IOException {
         

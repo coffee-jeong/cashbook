@@ -92,7 +92,9 @@
 </style>
 </head>
 <body>
-
+	<div>
+		<jsp:include page="/inc/nav.jsp"></jsp:include>
+	</div>
 	<form class="container" action="/cashbook/updateAdminPwAction.jsp" method="post">
 		<table class="form">
 			<tr class="id">

@@ -1,6 +1,6 @@
 package dto;
 
-public class receit {
+public class Receit {
 	private int cashNo;
 	private String filename;
 	private String createdate;

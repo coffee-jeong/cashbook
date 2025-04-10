@@ -1,11 +1,10 @@
 package dto;
 
-public class category {
+public class Category {
 	private int categoryNo;
 	private String kind;
 	private String title;
 	private String createdate;
-	
 	public int getCategoryNo() {
 		return categoryNo;
 	}
@@ -32,7 +31,9 @@ public class category {
 	}
 	@Override
 	public String toString() {
-		return "category [categoryNo=" + categoryNo + ", kind=" + kind + ", title=" + title + ", createdate="
+		return "Category [categoryNo=" + categoryNo + ", kind=" + kind + ", title=" + title + ", createdate="
 				+ createdate + "]";
 	}
+	
+	
 }
