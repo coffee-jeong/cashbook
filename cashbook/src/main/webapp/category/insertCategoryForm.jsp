@@ -20,8 +20,8 @@
 		<table border="1">
 		<tr>
 			<th>수입/지출</th>
-			<td><input type="radio" name="kind" value="0">수입</td>
-			<td><input type="radio" name="kind" value="1">지출</td>
+			<td><input type="radio" name="kind" value="수입">수입</td>
+			<td><input type="radio" name="kind" value="지출">지출</td>
 		</tr>
 		<tr>
 			<th>내용</th>

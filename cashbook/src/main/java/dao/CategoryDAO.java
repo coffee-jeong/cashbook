@@ -8,22 +8,36 @@ import dto.Paging;
 
 public class CategoryDAO {
 	// 카데고리 추가 
-	public void insertCategory(String kind, String title) throws ClassNotFoundException, SQLException {
-		Connection conn = null;
-        PreparedStatement stmt = null;
+	public void insertCategory(String kind, String title) throws SQLException, ClassNotFoundException {
+        // 데이터베이스 연결 및 중복 체크
         Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection conn = null;
+        PreparedStatement stmt2 = null;
         conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cashbook", "root", "java1234");
+        conn.setAutoCommit(false);
         
-        // SQL 쿼리 수정
-        String sql = "insert into category (kind, title, createdate) values (?, ?, now())";
-        stmt = conn.prepareStatement(sql);
-        stmt.setString(1, kind);
-        stmt.setString(2, title);
+        // 중복 검사 쿼리
+        String sql2 = "select count(*) from category where kind = ? and title = ?";
+        stmt2 = conn.prepareStatement(sql2);
+        stmt2.setString(1, kind);
+        stmt2.setString(2, title);
         
-        stmt.executeUpdate();
-        
+        ResultSet rs = stmt2.executeQuery();
+        if (rs.next()) {
+            int count = rs.getInt(1);
+            
+            // 타이틀이 중복되지 않으면 추가
+            if (count == 0) {
+                String sql = "insert into category (kind, title, createdate) values (?, ?, now())";
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                stmt.setString(1, kind);
+                stmt.setString(2, title);
+                stmt.executeUpdate();
+                conn.commit();
+            }
+        }
         conn.close();
-	}
+    }
 	
 	//카데고리 리스트
 	public ArrayList<Category> categoryList(Paging p) throws ClassNotFoundException, SQLException {

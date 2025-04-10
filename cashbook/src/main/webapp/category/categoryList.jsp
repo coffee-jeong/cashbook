@@ -51,7 +51,7 @@
 			<td><%=c.getTitle()%></td>
 			<td>
 			<a href="/cashbook/category/updateCategoryTitleForm.jsp?categoryNo=<%=c.getCategoryNo()%>&kind=<%=c.getKind()%>">[수정하기]</a>
-			<a href="/cashbook/category/deleteCategoryForm.jsp?categoryNo=<%=c.getCategoryNo()%>">[삭제하기]</a>
+			<a href="/cashbook/category/deleteCategory.jsp?categoryNo=<%=c.getCategoryNo()%>">[삭제하기]</a>
 			</td>
 			<td><%=c.getCreatedate() %></td>
 		</tr>
