@@ -72,8 +72,22 @@ public class CashDao {
 
 		return list;	
 	}
-	
-	public void updateCash() {
+	// cash 추가 
+	public void insertCash(int categoryNo, String cashDate, int amount, String memo) throws ClassNotFoundException, SQLException {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection conn = null;
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cashbook","root","java1234");
+		PreparedStatement stmt = null;
+		String sql = "insert into cash(category_no, cash_date, amount, memo) values(?,?,?,?)";
+		stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, categoryNo);
+		stmt.setString(2, cashDate);
+		stmt.setInt(3, amount);
+		stmt.setString(4, memo);
+		
+		stmt.executeUpdate();
+		
+		conn.close();
 		
 	}
 }

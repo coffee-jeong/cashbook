@@ -6,6 +6,7 @@
 		response.sendRedirect("/cashbook/loginForm.jsp");
 		return;
 	}
+	
 	String kind = request.getParameter("kind");
 	String title = request.getParameter("title");
 	System.out.println("kind:" + kind);

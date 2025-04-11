@@ -3,6 +3,12 @@
 <%@ page import="dao.*" %>
 <%@ page import="java.util.*" %>
 <%
+	String adminId = (String) session.getAttribute("adminId");
+	if(adminId == null) { // 로그인 상태
+		response.sendRedirect("/cashbook/loginForm.jsp");
+		return;
+	}
+
 	// dateList.jsp -> 수입/지출 입력(0000-00-00)String cashDate -> 
 	
 	String cashDate = request.getParameter("cashDate");
@@ -55,6 +61,7 @@
 				}
 			%>
 		</select>
+		<input type="hidden" name="kind" value="<%=kind%>">
 		금액 : <input type="number" name="amount">
 		내용 : <input type="text" name="memo">
 		<button type="submit">수입/지출 입력</button>
