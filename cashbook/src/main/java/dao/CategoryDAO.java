@@ -115,4 +115,24 @@ public class CategoryDAO {
 		
 		conn.close();
 	}
+	
+	public ArrayList<Category> selectCategoryListByKind(String kind) throws Exception {
+		ArrayList<Category> list = new ArrayList<>();
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection conn = null;
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cashbook","root","java1234");
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql = "select category_no categoryNo, title from category where kind = ?";
+		stmt = conn.prepareStatement(sql);
+		stmt.setString(1, kind);
+		rs = stmt.executeQuery();
+		while(rs.next()) {
+			Category c = new Category();
+			c.setCategoryNo(rs.getInt("categoryNo"));
+			c.setTitle(rs.getString("title"));
+			list.add(c);
+		}
+		return list;
+	}
 }

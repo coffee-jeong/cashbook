@@ -5,6 +5,8 @@
 		response.sendRedirect("/cashbook/loginForm.jsp");
 		return;
 	}
+	
+	
 %>
 <!DOCTYPE html>
 <html>
