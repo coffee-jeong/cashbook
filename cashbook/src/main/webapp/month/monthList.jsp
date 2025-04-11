@@ -9,7 +9,6 @@
 		return;
 	}
 	
-	
 	int year = request.getParameter("year") != null ? Integer.parseInt(request.getParameter("year")) : Calendar.getInstance().get(Calendar.YEAR);
 	int month = request.getParameter("month") != null ? Integer.parseInt(request.getParameter("month")) : Calendar.getInstance().get(Calendar.MONTH) + 1;
 
@@ -18,7 +17,7 @@
 
 	int startBlank = cal.get(Calendar.DAY_OF_WEEK) - 1; // 1일의 요일 (일:1 ~ 토:7 → 0부터 시작하게 -1)
 	int end = cal.getActualMaximum(Calendar.DAY_OF_MONTH); // 해당 월의 마지막 날짜
-	int count = 1;
+	int days = 1;
 	int row = (int)Math.ceil((startBlank + end) / 7.0); // 한 주에 몇 줄이 필요한지
 	
 	// 이전 달 계산
@@ -38,21 +37,20 @@
 	}
 	
 	// cash 데이터 조회 및 정리
-		Cash dao = new Cash();
+		CashDao dao = new CashDao();
 		List<HashMap<String, Object>> cashList = dao.cashList(year, month);
 
 		HashMap<Integer, HashMap<String, Integer>> dayMap = new HashMap<>();
 		for (HashMap<String, Object> entry : cashList) {
-			int day = (Integer) entry.get("day");
-			String kind = (String) entry.get("kind");
-			int total = (Integer) entry.get("total");
-
-			if (!dayMap.containsKey(day)) {
-				dayMap.put(day, new HashMap<>());
-			}
-			dayMap.get(day).put(kind, total);
-		}
+		int day = (Integer) entry.get("day");
+		String kind = (String) entry.get("kind");
+		int total = (Integer) entry.get("total");
 	
+		if (!dayMap.containsKey(day)) {
+			dayMap.put(day, new HashMap<>());
+		}
+		dayMap.get(day).put(kind, total);
+		}
 %>
 <!DOCTYPE html>
 <html>
@@ -111,7 +109,7 @@
 	</div>
 	<div>
 		<a href="/cashbook/month/monthList.jsp?year=<%=prevYear%>&month=<%=prevMonth%>">이전달</a>
-		<%=year%>년 <%=month%>월
+		<strong><%=year%>년 <%=month%>월</strong>
 		<a href="/cashbook/month/monthList.jsp?year=<%=nextYear%>&month=<%=nextMonth%>">다음달</a>
 	</div>
 	<table border="1">
@@ -134,29 +132,35 @@
 	%>
 			<td></td>
 	<%
-			} else if (count > end) {
+			} else if (days > end) {
 	%>
 			<td></td>
 	<%
 			} else {
 	%>
 			<td>
-				<div><strong><%=count%></strong></div>
+				<div>
+					<a href="/cashbook/cash/cashOne.jsp?year=<%=year%>&month=<%=month%>&days=<%=days%>"><%=days%></a>
+				</div>
 				<%
-					HashMap<String, Integer> cash = dayMap.get(count);
+					HashMap<String, Integer> cash = dayMap.get(days);
 					if (cash != null) {
 						if (cash.get("수입") != null) {
-				%>
-					<div class="amount-income">+<%= cash.get("수입") %>원</div>
+				%> 
+						<div class="amount-income">
+							 수입 합 : <%= cash.get("수입")%>원
+						</div>
 				<%
 						}
 						if (cash.get("지출") != null) {
-				%>
-					<div class="amount-expense">-<%= cash.get("지출") %>원</div>
+				%>	
+						<div class="amount-expense"> 
+							지출 합 :<%= cash.get("지출")%>원
+						</div>
 				<%
 						}
 					}
-					count++;
+					days++;
 				%>
 			</td>
 	<%

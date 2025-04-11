@@ -9,6 +9,17 @@ public class Cash {
 	private String color;
 	private String createdate;
 	private String updatedate;
+	
+	private Category category;
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public Category getCategory() {
+		return this.category;
+	}
+	
 	public int getCash_no() {
 		return cash_no;
 	}
@@ -62,6 +73,17 @@ public class Cash {
 		return "Cash [cash_no=" + cash_no + ", category_no=" + category_no + ", cash_date=" + cash_date + ", amount="
 				+ amount + ", memo=" + memo + ", color=" + color + ", createdate=" + createdate + ", updatedate="
 				+ updatedate + "]";
+	}
+	
+	private String kind;
+
+	public String getKind() {
+	    return kind;
+	}
+
+	public void setKind(String string) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

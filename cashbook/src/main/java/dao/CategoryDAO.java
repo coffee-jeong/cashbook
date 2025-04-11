@@ -66,7 +66,7 @@ public class CategoryDAO {
         conn.close();
 		return list;
 	}
-	
+	//카테고리 수정(title)
 	public void updateCategory(String title, int categoryNO) throws ClassNotFoundException, SQLException {
 		int row = 0;
 		Connection conn = null;
@@ -92,6 +92,7 @@ public class CategoryDAO {
 		conn.close();
 	}
 	
+	//카테고리 삭제
 	public void deleteCategory(int categoryNo) throws ClassNotFoundException, SQLException {
 		int row = 0;
 		Connection conn = null;
@@ -116,6 +117,7 @@ public class CategoryDAO {
 		conn.close();
 	}
 	
+	// insert cash
 	public ArrayList<Category> selectCategoryListByKind(String kind) throws Exception {
 		ArrayList<Category> list = new ArrayList<>();
 		Class.forName("com.mysql.cj.jdbc.Driver");
