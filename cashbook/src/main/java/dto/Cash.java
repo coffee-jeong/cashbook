@@ -85,5 +85,10 @@ public class Cash {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public void setTitle(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

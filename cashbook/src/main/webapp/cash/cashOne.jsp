@@ -25,7 +25,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title><%= year %>년 <%= month %>월 <%= days %>일 내역</title>
+<title><%=year%>년 <%=month%>월 <%=days%>일 내역</title>
 <style>
 	body {
 		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -90,24 +90,32 @@
 	<div class="info">
 		<jsp:include page="/inc/nav.jsp"></jsp:include>
 	</div>
-	<h2><%= year %>년 <%= month %>월 <%= days %>일 수입/지출 내역</h2>
+	<h2><%=year%>년 <%=month%>월 <%=days%>일 수입/지출 내역</h2>
 	<table>
 		<tr>
 			<th>수입/지출</th>
 			<th>내용</th>
 			<th>금액</th>
 		</tr>
-		<% for(Cash c : list) { %>
+		<% 
+			for(Cash c : list) { 
+		%>
 		<tr>
-			<td><%= c.getCategory().getKind() %></td>
-			<td><%= c.getMemo() %></td>
-			<td><%= c.getAmount() %>원</td>
+			<td><%=c.getCategory().getKind()%></td>
+			<td>
+				<a href="/cashbook/cash/detailCashOne.jsp?memo=<%=c.getMemo()%>&title=<%=c.getCategory().getTitle()%>&amount=<%=c.getAmount()%>&cashdate=<%=cashDate%>">
+   				<%=c.getMemo()%>
+</a>
+			</td>
+			<td><%=c.getAmount()%>원</td>
 		</tr>
-		<% } %>
+		<% 
+		} 
+		%>
 	</table>
 	<div class="button">
 		<form method="post" action="/cashbook/cash/insertCashForm.jsp">
-			<input type="hidden" name="cashDate" value="<%=cashDate%>">
+			<input type="hidden" name="cashdate" value="<%=cashDate%>">
 			<button class="buttona" type="submit">작성하기</button>
 		</form>
 	</div>

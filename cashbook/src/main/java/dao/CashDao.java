@@ -46,7 +46,7 @@ public class CashDao {
 		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cashbook","root","java1234");
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT ct.kind kind, c.memo memo, c.amount amount "
+		String sql = "SELECT ct.title, ct.kind, c.memo memo, c.amount amount, c.createdate "
 				+ "FROM cash c INNER JOIN category ct "
 				+ "ON c.category_no = ct.category_no "
 				+ "WHERE YEAR(cash_date) = ? and month(cash_date)= ? AND DAY(cash_date) = ? "
@@ -64,7 +64,8 @@ public class CashDao {
 			    c.setAmount(rs.getInt("amount"));
 
 			    Category cat = new Category();
-			    cat.setKind(rs.getString("kind")); // kind 설정
+			    cat.setKind(rs.getString("kind")); 	// kind 설정
+			    cat.setTitle(rs.getString("title"));
 			    c.setCategory(cat); // Cash에 Category 넣기
 
 			    list.add(c);
@@ -89,5 +90,15 @@ public class CashDao {
 		
 		conn.close();
 		
+	}
+	
+	// 상세페이지에서 수정시
+	public void updateCash() throws ClassNotFoundException, SQLException {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection conn = null;
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cashbook","root","java1234");
+		PreparedStatement stmt = null;
+		String sql = "";
+		stmt = conn.prepareStatement(sql);
 	}
 }
