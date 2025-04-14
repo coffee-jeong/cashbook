@@ -46,7 +46,7 @@ public class CashDao {
 		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cashbook","root","java1234");
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT ct.title, ct.kind, c.memo memo, c.amount amount, c.createdate "
+		String sql = "SELECT c.cash_no cashNo, ct.title, ct.kind, c.memo memo, c.amount amount, c.createdate "
 				+ "FROM cash c INNER JOIN category ct "
 				+ "ON c.category_no = ct.category_no "
 				+ "WHERE YEAR(cash_date) = ? and month(cash_date)= ? AND DAY(cash_date) = ? "
@@ -62,6 +62,7 @@ public class CashDao {
 				Cash c = new Cash();
 			    c.setMemo(rs.getString("memo"));
 			    c.setAmount(rs.getInt("amount"));
+			    c.setCash_no(rs.getInt("cashNo"));
 
 			    Category cat = new Category();
 			    cat.setKind(rs.getString("kind")); 	// kind 설정
@@ -93,12 +94,46 @@ public class CashDao {
 	}
 	
 	// 상세페이지에서 수정시
-	public void updateCash() throws ClassNotFoundException, SQLException {
-		Class.forName("com.mysql.cj.jdbc.Driver");
+	public void updateCash(int amount, String memo, String cashDate, int cashNo) throws ClassNotFoundException, SQLException {
+		int row = 0;
 		Connection conn = null;
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cashbook","root","java1234");
 		PreparedStatement stmt = null;
-		String sql = "";
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cashbook","root","java1234");
+		String sql = "UPDATE cash SET amount = ?, memo = ?, cash_date = ? WHERE cash_no = ?";
 		stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, amount);
+		stmt.setString(2, memo);
+		stmt.setString(3, cashDate);
+		stmt.setInt(4, cashNo);
+		
+		row = stmt.executeUpdate();
+		if(row == 1) {
+			System.out.println("정상수정");
+		} else {
+			System.out.println("수정실패");
+		}
+		
+		conn.close();
+	}
+	
+	public void deleteCash(int cashNo) throws ClassNotFoundException, SQLException {
+		int row = 0;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cashbook","root","java1234");
+		String sql = "delete from cash where cash_no = ?";
+		stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, cashNo);
+		
+		row = stmt.executeUpdate();
+		if(row == 1) {
+			System.out.println("캐시 정상 삭제");
+		} else {
+			System.out.println("캐시 삭제 실패");
+		}
+		
+		conn.close();
 	}
 }

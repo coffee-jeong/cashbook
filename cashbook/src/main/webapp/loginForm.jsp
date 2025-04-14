@@ -96,7 +96,7 @@
 		<table class="table">
 			<tr>
 				<th class="id">
-					아이디: <input type="text" name ="adminId">
+					아이디: <input type="text" name ="adminId" value="admin">
 				</th>
 				<th class="pw">
 					비밀번호: <input type="password" name ="adminPw">

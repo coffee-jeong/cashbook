@@ -20,6 +20,8 @@
 	String monthStr = (month < 10 ? "0" : "") + month;
 	String dayStr = (days < 10 ? "0" : "") + days;
 	String cashDate = year + "-" + monthStr + "-" + dayStr;
+	
+	System.out.println("cashDate:" + cashDate);
 %>
 <!DOCTYPE html>
 <html>
@@ -103,7 +105,7 @@
 		<tr>
 			<td><%=c.getCategory().getKind()%></td>
 			<td>
-				<a href="/cashbook/cash/detailCashOne.jsp?memo=<%=c.getMemo()%>&title=<%=c.getCategory().getTitle()%>&amount=<%=c.getAmount()%>&cashdate=<%=cashDate%>">
+				<a href="/cashbook/cash/detailCashOne.jsp?memo=<%=c.getMemo()%>&title=<%=c.getCategory().getTitle()%>&amount=<%=c.getAmount()%>&cashDate=<%=cashDate%>&cashNo=<%=c.getCash_no()%>">
    				<%=c.getMemo()%>
 </a>
 			</td>
@@ -115,7 +117,7 @@
 	</table>
 	<div class="button">
 		<form method="post" action="/cashbook/cash/insertCashForm.jsp">
-			<input type="hidden" name="cashdate" value="<%=cashDate%>">
+			<input type="hidden" name="cashDate" value="<%=cashDate%>">
 			<button class="buttona" type="submit">작성하기</button>
 		</form>
 	</div>

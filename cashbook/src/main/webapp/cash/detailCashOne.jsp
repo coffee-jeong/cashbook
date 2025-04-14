@@ -5,15 +5,16 @@
 		response.sendRedirect("/cashbook/loginForm.jsp");
 		return;
 	}
-
+	int cashNo = Integer.parseInt(request.getParameter("cashNo"));
 	String memo = request.getParameter("memo");
 	String title = request.getParameter("title");
 	int amount = Integer.parseInt(request.getParameter("amount"));
-	String cashdate = request.getParameter("cashdate");
+	String cashDate = request.getParameter("cashDate");
+	System.out.println("cashNo:" + cashNo);
 	System.out.println("memo:" + memo);
 	System.out.println("title:" + title);
 	System.out.println("amount:" + amount);
-	System.out.println("cashdate:" + cashdate);
+	System.out.println("cashDate:" + cashDate);
 %>
 <!DOCTYPE html>
 <html>
@@ -40,10 +41,10 @@
 			</tr>
 			<tr>
 				<th>작성날짜</th>
-				<td><%=cashdate%></td>
+				<td><%=cashDate%></td>
 			</tr>
 		</table>
-		<a href="/cashbook/cash/updateCashForm.jsp?title=<%=title%>&memo=<%=memo%>&amount=<%=amount%>&cashdate=<%=cashdate%>">[수정하기]</a>
-		<a href="/cashbook/cash/deleteCashAction.jsp">[삭제하기]</a>
+		<a href="/cashbook/cash/updateCashForm.jsp?title=<%=title%>&memo=<%=memo%>&amount=<%=amount%>&cashDate=<%=cashDate%>&cashNo=<%=cashNo%>">[수정하기]</a>
+		<a href="/cashbook/cash/deleteCashAction.jsp?cashNo=<%=cashNo%>">[삭제하기]</a>
 </body>
 </html>
