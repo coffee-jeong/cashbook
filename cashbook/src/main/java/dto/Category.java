@@ -5,6 +5,7 @@ public class Category {
 	private String kind;
 	private String title;
 	private String createdate;
+	
 	public int getCategoryNo() {
 		return categoryNo;
 	}

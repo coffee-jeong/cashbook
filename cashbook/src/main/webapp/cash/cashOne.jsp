@@ -98,6 +98,7 @@
 			<th>수입/지출</th>
 			<th>내용</th>
 			<th>금액</th>
+			<th>영수증</th>
 		</tr>
 		<% 
 			for(Cash c : list) { 
@@ -110,10 +111,24 @@
 </a>
 			</td>
 			<td><%=c.getAmount()%>원</td>
+			<td>
+				<% 
+					if (c.getFilename() != null && !c.getFilename().equals("")) { 
+				%>
+					<img src="/cashbook/upload/<%=c.getFilename()%>" alt="영수증" width="100" height="100">
+				<%
+					} else { 
+				%>
+					없음
+				<%
+					} 
+				%>
+			</td>
 		</tr>
 		<% 
 		} 
 		%>
+		
 	</table>
 	<div class="button">
 		<form method="post" action="/cashbook/cash/insertCashForm.jsp">

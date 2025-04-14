@@ -46,11 +46,12 @@ public class CashDao {
 		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cashbook","root","java1234");
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT c.cash_no cashNo, ct.title, ct.kind, c.memo memo, c.amount amount, c.createdate "
+		String sql = "SELECT c.cash_no cashNo, ct.title title, ct.kind kind, c.memo memo, c.amount amount, c.createdate createdate, r.filename filename "
 				+ "FROM cash c INNER JOIN category ct "
-				+ "ON c.category_no = ct.category_no "
-				+ "WHERE YEAR(cash_date) = ? and month(cash_date)= ? AND DAY(cash_date) = ? "
-				+ "ORDER BY kind";
+				+ "ON c.category_no = ct.category_no LEFT JOIN receit r "
+				+ "ON c.cash_no = r.cash_no\r\n"
+				+ "WHERE YEAR(c.cash_date) = ? AND MONTH(c.cash_date) = ? AND DAY(c.cash_date) = ? "
+				+ "ORDER BY ct.kind";
 		stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, year);
 		stmt.setInt(2, month);
@@ -63,6 +64,7 @@ public class CashDao {
 			    c.setMemo(rs.getString("memo"));
 			    c.setAmount(rs.getInt("amount"));
 			    c.setCash_no(rs.getInt("cashNo"));
+			    c.setFilename(rs.getString("filename"));
 
 			    Category cat = new Category();
 			    cat.setKind(rs.getString("kind")); 	// kind 설정

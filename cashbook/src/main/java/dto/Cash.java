@@ -90,5 +90,16 @@ public class Cash {
 		// TODO Auto-generated method stub
 		
 	}
+
+	private String filename; // 필드 추가
+
+	public String getFilename() {
+	    return filename;
+	}
+
+	public void setFilename(String filename) {
+	    this.filename = filename;
+	}
+
 	
 }
