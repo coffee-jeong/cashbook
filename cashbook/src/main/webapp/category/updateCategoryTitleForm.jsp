@@ -27,8 +27,8 @@
 		</tr>
 		<tr >
 			<th>수입/지출</th>
-			<td><input type="radio" name="kind" value="수입" checked="<%=kind.equals("수입") ? "checked" : "" %>" readonly>수입</td>
-			<td><input type="radio" name="kind" value="지출" checked="<%=kind.equals("지출") ? "checked" : "" %>" readonly>지출</td>
+			<td><input type="radio" name="kind" value="수입" checked="<%=kind.equals("수입") ? "checked" : "" %>" disabled>수입</td>
+			<td><input type="radio" name="kind" value="지출" checked="<%=kind.equals("지출") ? "checked" : "" %>" disabled>지출</td>
 		</tr>
 		<tr>
 			<th>내용</th>

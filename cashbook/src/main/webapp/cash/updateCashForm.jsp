@@ -21,40 +21,42 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>Cash 수정</title>
 </head>
 <body>
 	<div class="info">
 		<jsp:include page="/inc/nav.jsp"></jsp:include>
 	</div>
+
+	<form action="/cashbook/cash/updateCashAction.jsp" method="post">
+		<input type="hidden" name="cashNo" value="<%=cashNo%>">
+		<input type="hidden" name="cashDate" value="<%=cashDate%>">
+		<input type="hidden" name="title" value="<%=title%>">
 		<table border="1">
 			<tr>
 				<th>분류</th>
-				<td>
-					<input type="text" name="title" value="<%=title%>" readonly>
-				</td>
+				<td><input type="text" name="title" value="<%=title%>" readonly></td>
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td>
-					<textarea rows="5" cols="20" name="memo"></textarea>
-				</td>
+				<td><textarea rows="5" cols="20" name="memo"><%=memo%></textarea></td>
 			</tr>
 			<tr>
 				<th>금액</th>
-				<td>
-					<input type="number" name="amount">
-				</td>
+				<td><input type="number" name="amount" value="<%=amount%>"></td>
 			</tr>
 			<tr>
 				<th>작성날짜</th>
 				<td><%=cashDate%></td>
 			</tr>
 		</table>
-		<a href="/cashbook/cash/updateCashAction.jsp?memo=<%=memo%>&amount=<%=amount%>&cashDate=<%=cashDate%>&cashNo=<%=cashNo%>">[수정하기]</a>
-		<a href="/cashbook/cash/deleteCashAction.jsp?cashNo=<%=cashNo%>">[삭제하기]</a>
-		<a href="/cashbook/receit/insertReceitForm.jsp?cashNo=<%=cashNo%>">[영수증등록]</a>
-		<a href="/cashbook/receit/deleteReceitForm.jsp?cashNo=<%=cashNo%>">[영수증삭제]</a>
-		
+		<br>
+		<input type="submit" value="수정하기">
+	</form>
+
+	<br>
+	<a href="/cashbook/cash/deleteCashAction.jsp?cashNo=<%=cashNo%>">[삭제하기]</a>
+	<a href="/cashbook/receit/insertReceitForm.jsp?cashNo=<%=cashNo%>">[영수증등록]</a>
+	<a href="/cashbook/receit/deleteReceitForm.jsp?cashNo=<%=cashNo%>">[영수증삭제]</a>
 </body>
 </html>

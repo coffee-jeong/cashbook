@@ -14,4 +14,3 @@
 	cashDao.updateCash(amount, memo, cashDate, cashNo);
 	
 	response.sendRedirect("/cashbook/month/monthList.jsp");
-%>

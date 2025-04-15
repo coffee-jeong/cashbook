@@ -110,16 +110,16 @@
    				<%=c.getMemo()%>
 </a>
 			</td>
-			<td><%=c.getAmount()%>원</td>
+			<td><%=String.format("%,d",c.getAmount())%>원</td>
 			<td>
 				<% 
 					if (c.getFilename() != null && !c.getFilename().equals("")) { 
 				%>
-					<img src="/cashbook/upload/<%=c.getFilename()%>" alt="영수증" width="100" height="100">
+					<img src="/cashbook/upload/<%=c.getFilename()%>" alt="영수증" width="100" height="100" style="display: block; margin: 0 auto;">
 				<%
 					} else { 
 				%>
-					없음
+					&#128581
 				<%
 					} 
 				%>

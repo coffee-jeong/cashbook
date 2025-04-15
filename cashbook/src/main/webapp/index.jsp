@@ -92,7 +92,7 @@
 		<li><a href="/cashbook/category/insertCategoryForm.jsp">[카테고리 입력하기]</a></li>
 		<li><a href="/cashbook/category/categoryList.jsp">[카테고리 리스트]</a></li>
 		<li><a class="nav-link" href="/cashbook/month/monthList.jsp">[달력]</a></li>
-		<li><a class="nav-link" href="/cashbook/cash/insertCashForm.jsp">[캐쉬추가]</a></li>
+		<li><a class="nav-link" href="/cashbook/statistics.jsp?">[통계]</a></li>
 	</ol>
 </body>
 </html>

@@ -37,20 +37,20 @@
 	}
 	
 	// cash 데이터 조회 및 정리
-		CashDao dao = new CashDao();
-		List<HashMap<String, Object>> cashList = dao.cashList(year, month);
+	CashDao dao = new CashDao();
+	List<HashMap<String, Object>> cashList = dao.cashList(year, month);
 
-		HashMap<Integer, HashMap<String, Integer>> dayMap = new HashMap<>();
-		for (HashMap<String, Object> entry : cashList) {
-		int day = (Integer) entry.get("day");
-		String kind = (String) entry.get("kind");
-		int total = (Integer) entry.get("total");
-	
-		if (!dayMap.containsKey(day)) {
-			dayMap.put(day, new HashMap<>());
-		}
-		dayMap.get(day).put(kind, total);
-		}
+	HashMap<Integer, HashMap<String, Integer>> dayMap = new HashMap<>();
+	for (HashMap<String, Object> entry : cashList) {
+	int day = (Integer) entry.get("day");
+	String kind = (String) entry.get("kind");
+	int total = (Integer) entry.get("total");
+
+	if (!dayMap.containsKey(day)) {
+		dayMap.put(day, new HashMap<>());
+	}
+	dayMap.get(day).put(kind, total);
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -148,14 +148,14 @@
 						if (cash.get("수입") != null) {
 				%> 
 						<div class="amount-income">
-							 수입 합 : <%= cash.get("수입")%>원
+							 수입 합 : <%=String.format("%,d", cash.get("수입"))%>원
 						</div>
 				<%
 						}
 						if (cash.get("지출") != null) {
 				%>	
 						<div class="amount-expense"> 
-							지출 합 :<%= cash.get("지출")%>원
+							지출 합 :<%=String.format("%,d", cash.get("지출"))%>원
 						</div>
 				<%
 						}

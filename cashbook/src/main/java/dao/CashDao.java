@@ -38,7 +38,7 @@ public class CashDao {
 		}
 		return list;
 	}
-	// cashList 특정 일자의 수입/지출 상세 내역
+	// cashList 특정 일자의 수입/지출 상세 내역  0000년 00월 00일 의 상세보기 
 	public ArrayList<Cash> selectCashList(int year, int month, int days) throws ClassNotFoundException, SQLException{
 		ArrayList<Cash> list = new ArrayList<>();
 		Class.forName("com.mysql.cj.jdbc.Driver");
@@ -49,7 +49,7 @@ public class CashDao {
 		String sql = "SELECT c.cash_no cashNo, ct.title title, ct.kind kind, c.memo memo, c.amount amount, c.createdate createdate, r.filename filename "
 				+ "FROM cash c INNER JOIN category ct "
 				+ "ON c.category_no = ct.category_no LEFT JOIN receit r "
-				+ "ON c.cash_no = r.cash_no\r\n"
+				+ "ON c.cash_no = r.cash_no "
 				+ "WHERE YEAR(c.cash_date) = ? AND MONTH(c.cash_date) = ? AND DAY(c.cash_date) = ? "
 				+ "ORDER BY ct.kind";
 		stmt = conn.prepareStatement(sql);
@@ -109,6 +109,8 @@ public class CashDao {
 		stmt.setString(3, cashDate);
 		stmt.setInt(4, cashNo);
 		
+		System.out.println("실행할 SQL: " + stmt.toString()); // 디버깅 로그
+		
 		row = stmt.executeUpdate();
 		if(row == 1) {
 			System.out.println("정상수정");
@@ -119,7 +121,7 @@ public class CashDao {
 		conn.close();
 	}
 	
-	public void deleteCash(int cashNo) throws ClassNotFoundException, SQLException {
+	public int deleteCash(int cashNo) throws ClassNotFoundException, SQLException {
 		int row = 0;
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -129,13 +131,70 @@ public class CashDao {
 		stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, cashNo);
 		
-		row = stmt.executeUpdate();
-		if(row == 1) {
-			System.out.println("캐시 정상 삭제");
-		} else {
-			System.out.println("캐시 삭제 실패");
+		stmt.executeUpdate();
+	
+		return row;
+		
+	}
+	
+	public ArrayList<HashMap<String, Object>> statisticsList(int choiceYear) throws ClassNotFoundException, SQLException {
+		ArrayList<HashMap<String, Object>> list = new ArrayList<>();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cashbook","root","java1234");
+		String sql = "SELECT MONTH(cs.cash_date) AS MONTH, ct.kind, ct.title, COUNT(*) AS COUNT, SUM(cs.amount) AS sum "
+				+ "FROM cash cs "
+				+ "INNER JOIN category ct ON cs.category_no = ct.category_no "
+				+ "WHERE YEAR(cs.cash_date) = ? "
+				+ "GROUP BY MONTH(cs.cash_date), ct.kind, ct.title "
+				+ "ORDER BY month, ct.kind, ct.title";
+		stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, choiceYear);
+		rs = stmt.executeQuery();
+		
+		while(rs.next()) {
+			HashMap<String, Object> map = new HashMap<>();
+			map.put("month", rs.getInt("month"));
+			map.put("kind", rs.getString("kind"));
+			map.put("title", rs.getString("title"));
+			map.put("count", rs.getInt("count"));
+			map.put("sum", rs.getInt("sum"));
+			list.add(map);
+		}
+		conn.close();
+		return list;
+	}
+	
+	public ArrayList<HashMap<String, Object>> yearStatistics(int choiceYear) throws ClassNotFoundException, SQLException {
+		ArrayList<HashMap<String, Object>> list = new ArrayList<>();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cashbook", "root", "java1234");
+		
+		String sql = "SELECT ct.kind, COUNT(*) AS count, SUM(cs.amount) AS sum "
+				+ "FROM category ct INNER JOIN cash cs "
+				+ "ON ct.category_no = cs.category_no "
+				+ "WHERE YEAR(cs.cash_date) = ? "
+				+ "GROUP BY ct.kind";
+		
+		stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, choiceYear);
+		rs = stmt.executeQuery();
+		
+		while (rs.next()) {
+			HashMap<String, Object> map = new HashMap<>();
+			map.put("kind", rs.getString("kind"));
+			map.put("count", rs.getInt("count"));
+			map.put("sum", rs.getInt("sum"));
+			list.add(map);
 		}
 		
 		conn.close();
+		return list;
 	}
+
 }
