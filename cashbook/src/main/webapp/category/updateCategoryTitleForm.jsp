@@ -14,9 +14,82 @@
 <head>
 <meta charset="UTF-8">
 <title>카테고리 수정</title>
+<style>
+	body {
+		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		background-color: #f0f2f5;
+		padding: 40px;
+	}
+
+	/* nav 영역 스타일 */
+	.info {
+		display: flex;
+		justify-content: center;
+		margin-bottom: 30px;
+		background-color: #fff;
+		padding: 15px;
+		border-radius: 10px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+	}
+
+	form {
+		width: 60%;
+		margin: 0 auto;
+		background-color: #fff;
+		padding: 25px;
+		border-radius: 10px;
+		box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	}
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+	}
+
+	th, td {
+		padding: 14px;
+		text-align: left;
+		border-bottom: 1px solid #ddd;
+	}
+
+	th {
+		background-color: #007bff;
+		color: white;
+		text-align: center;
+		width: 150px;
+	}
+
+	input[type="text"] {
+		width: 95%;
+		padding: 8px;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+	}
+
+	input[type="radio"] {
+		margin-right: 5px;
+	}
+
+	button {
+		display: block;
+		margin: 20px auto 0;
+		padding: 10px 20px;
+		background-color: #28a745;
+		color: white;
+		font-size: 16px;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+		transition: background-color 0.3s ease;
+	}
+
+	button:hover {
+		background-color: #218838;
+	}
+</style>
 </head>
 <body>
-	<div>
+	<div class="info">
 		<jsp:include page="/inc/nav.jsp"></jsp:include>
 	</div>
 	<form action="/cashbook/category/updateCategoryAction.jsp">

@@ -12,30 +12,28 @@
 <meta charset="UTF-8">
 <title>비밀번호 수정</title>
 <style>
-    /* 전체 페이지 스타일 */
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start; /* 변경: 상단 정렬 */
-        height: 100vh;
-        color: #333;
-    }
 
-    /* 로그인 폼 컨테이너 스타일 */
+	 body {
+	    font-family: Arial, sans-serif;
+	    background-color: #f4f4f4;
+	    margin: 0;
+	    padding: 0;
+	    display: flex;
+	    flex-direction: column; /* nav와 form을 위아래로 배치 */
+	    align-items: center;
+	    min-height: 100vh;
+	    color: #333;
+	}
+
     .container {
-        background-color: #fff;
-        padding: 30px;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        width: 300px;
-        margin-top: 20px; /* 제목 아래 여백 */
-    }
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin-top: 50px; 
+	}
 
-    /* 테이블 스타일 */
     .table {
         width: 100%;
         margin-bottom: 20px;
@@ -57,7 +55,6 @@
         box-sizing: border-box;
     }
 
-    /* 버튼 스타일 */
     .button {
         width: 100%;
         padding: 10px;
@@ -78,7 +75,6 @@
         background-color: #3e8e41;
     }
 
-    /* 반응형 디자인 */
     @media (max-width: 600px) {
         .container {
             width: 80%;
@@ -89,10 +85,22 @@
             padding: 8px;
         }
     }
+    
+	.info {
+	    width: 100%;
+	    display: flex;
+	    justify-content: center;
+	    background-color: #fff;
+	    padding: 15px 0;
+	    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+	    z-index: 10;
+	    position: sticky;
+	    top: 0;
+	}
 </style>
 </head>
 <body>
-	<div>
+	<div class="info">
 		<jsp:include page="/inc/nav.jsp"></jsp:include>
 	</div>
 	<form class="container" action="/cashbook/updateAdminPwAction.jsp" method="post">

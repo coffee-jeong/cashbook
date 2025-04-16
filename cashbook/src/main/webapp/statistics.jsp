@@ -47,10 +47,20 @@
         form {
             text-align: center;
         }
+        .info {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-bottom: 30px;
+		background-color: #ffffff;
+		padding: 15px;
+		border-radius: 10px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+	}
     </style>
 </head>
 <body>
-	<div>
+	<div class="info">
 		<jsp:include page="/inc/nav.jsp"></jsp:include>
 	</div>
     <h2><%=choiceYear%>년 월별 수입/지출 통계</h2>

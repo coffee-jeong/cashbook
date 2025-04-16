@@ -22,6 +22,112 @@
 <head>
 <meta charset="UTF-8">
 <title>Cash 수정</title>
+<style>
+	body {
+		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		background-color: #f9f9f9;
+		padding: 40px;
+	}
+
+	.info {
+		display: flex;
+		justify-content: center;
+		margin-bottom: 30px;
+		background-color: #ffffff;
+		padding: 15px;
+		border-radius: 10px;
+		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+	}
+
+	form {
+		width: 60%;
+		margin: 0 auto;
+		background-color: #fff;
+		padding: 25px;
+		border-radius: 10px;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	}
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+	}
+
+	th, td {
+		padding: 14px;
+		text-align: left;
+		border-bottom: 1px solid #ddd;
+	}
+
+	th {
+		background-color: #007bff;
+		color: white;
+		text-align: center;
+		width: 150px;
+	}
+
+	input[type="text"],
+	input[type="number"],
+	textarea {
+		width: 95%;
+		padding: 8px;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+	}
+
+	input[type="submit"] {
+		display: block;
+		margin: 20px auto 0;
+		padding: 10px 25px;
+		background-color: #28a745;
+		color: white;
+		border: none;
+		font-size: 16px;
+		border-radius: 5px;
+		cursor: pointer;
+		transition: background-color 0.3s ease;
+	}
+
+	input[type="submit"]:hover {
+		background-color: #218838;
+	}
+
+	a {
+		display: inline-block;
+		margin: 10px 10px 0 0;
+		padding: 8px 16px;
+		background-color: #6c757d;
+		color: white;
+		text-decoration: none;
+		border-radius: 5px;
+		transition: background-color 0.3s ease;
+	}
+
+	a:hover {
+		background-color: #5a6268;
+	}
+	
+	.action-buttons {
+	text-align: center;
+	margin-top: 30px;
+	}
+	
+	.action-buttons a {
+		display: inline-block;
+		margin: 0 10px;
+		padding: 10px 20px;
+		background-color: #6c757d;
+		color: white;
+		text-decoration: none;
+		border-radius: 5px;
+		font-size: 15px;
+		transition: background-color 0.3s ease;
+	}
+	
+	.action-buttons a:hover {
+		background-color: #5a6268;
+	}
+</style>
 </head>
 <body>
 	<div class="info">
@@ -54,9 +160,10 @@
 		<input type="submit" value="수정하기">
 	</form>
 
-	<br>
-	<a href="/cashbook/cash/deleteCashAction.jsp?cashNo=<%=cashNo%>">[삭제하기]</a>
-	<a href="/cashbook/receit/insertReceitForm.jsp?cashNo=<%=cashNo%>">[영수증등록]</a>
-	<a href="/cashbook/receit/deleteReceitForm.jsp?cashNo=<%=cashNo%>">[영수증삭제]</a>
+	<div class="action-buttons">
+		<a href="/cashbook/cash/deleteCashAction.jsp?cashNo=<%=cashNo%>">삭제하기</a>
+		<a href="/cashbook/receit/insertReceitForm.jsp?cashNo=<%=cashNo%>">영수증 등록</a>
+		<a href="/cashbook/receit/deleteReceitForm.jsp?cashNo=<%=cashNo%>">영수증 삭제</a>
+	</div>
 </body>
 </html>

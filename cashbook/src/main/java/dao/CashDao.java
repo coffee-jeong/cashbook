@@ -121,7 +121,7 @@ public class CashDao {
 		conn.close();
 	}
 	
-	public int deleteCash(int cashNo) throws ClassNotFoundException, SQLException {
+	public void deleteCash(int cashNo) throws ClassNotFoundException, SQLException {
 		int row = 0;
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -131,9 +131,14 @@ public class CashDao {
 		stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, cashNo);
 		
-		stmt.executeUpdate();
-	
-		return row;
+		row = stmt.executeUpdate();
+		if(row == 1) {
+			System.out.println("정상수정");
+		} else {
+			System.out.println("수정실패");
+		}
+		
+		conn.close();
 		
 	}
 	

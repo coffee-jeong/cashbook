@@ -29,9 +29,83 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
+<style>
+	body {
+		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		background-color: #f8f9fa;
+		padding: 40px;
+		color: #333;
+	}
+
+	/* nav 영역 중앙 정렬 및 스타일 */
+	.info {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-bottom: 30px;
+		background-color: #ffffff;
+		padding: 15px;
+		border-radius: 10px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+	}
+
+	/* 폼 전체 박스 스타일 */
+	form {
+		width: 60%;
+		margin: 30px auto;
+		background-color: #fff;
+		padding: 25px;
+		border-radius: 12px;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	}
+
+	form input[type="text"],
+	form input[type="number"],
+	form select {
+		width: 100%;
+		padding: 10px;
+		margin: 10px 0 20px 0;
+		border: 1px solid #ccc;
+		border-radius: 6px;
+		font-size: 16px;
+	}
+
+	form input[readonly] {
+		background-color: #e9ecef;
+	}
+
+	form button {
+		background-color: #007bff;
+		color: white;
+		border: none;
+		padding: 12px 20px;
+		border-radius: 6px;
+		font-size: 16px;
+		cursor: pointer;
+		transition: background-color 0.3s ease;
+	}
+
+	form button:hover {
+		background-color: #0056b3;
+	}
+
+	hr {
+		border: 0;
+		height: 1px;
+		background: #dee2e6;
+		margin: 40px auto;
+		width: 60%;
+	}
+
+	@media (max-width: 768px) {
+		form {
+			width: 90%;
+		}
+	}
+</style>
 </head>
 <body>
-	<div>
+	<div class="info">
 		<jsp:include page="/inc/nav.jsp"></jsp:include>
 	</div>
 	<!-- 수입/지출 선택을 위한 form -->
